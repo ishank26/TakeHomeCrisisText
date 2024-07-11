@@ -55,13 +55,13 @@ Note: If compute cluster is terminated. Create and attach new cluster from topri
 4. Perform schema check for each table.
 
 
-Note: For choosing z-order high cardinality index such as CASEID is chosen. For paritionin as low cardinality index with approximately uniform distribution is chosen. 
+Note: For choosing z-order high cardinality index such as CASEID is chosen. For paritioning a low cardinality index with approximately uniform distribution is chosen. 
 
 
 # Optimizations:
-1. WWe can use streaming in delta table for live updates to each layer if the data source changes frequently. 
+1. We can use streaming in delta table for live updates to each layer if the data source changes frequently. 
 2. Transaction logs for each delta can be backed up for disaster recovery in case of failures. 
-3. Set periodicly perform vacuum operation to remove any stale logs before retention horizon.
+3. Periodicly perform vacuum operation to remove any stale logs before retention horizon.
 4. Batch job can be cerated for each stage which can sequentially trigger each notebook.
 5. Use logging and more try/catch to log any exceptions. Store these logs for monitoring.
 6. Store config file or env variables in a seperate while within disk or external storage (s3). We can use secrets manager for the same as well.
