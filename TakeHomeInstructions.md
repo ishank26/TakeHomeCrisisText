@@ -64,4 +64,4 @@ Note: For choosing z-order high cardinality index such as CASEID is chosen. For 
 3. Set periodicly perform vacuum operation to remove any stale logs before retention horizon.
 4. Batch job can be cerated for each stage which can sequentially trigger each notebook.
 5. Use logging and more try/catch to log any exceptions. Store these logs for monitoring.
-6. Store config file or env variables in a seperate while within diskor external storage. We can use secrets manager for the same as well.
+6. Store config file or env variables in a seperate while within disk or external storage (s3). We can use secrets manager for the same as well.
