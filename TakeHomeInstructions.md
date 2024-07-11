@@ -22,15 +22,16 @@ Note: If compute cluster is terminated. Create and attach new cluster from topri
 8. Check for total null counts in all fields. Based upon this frequency, Age has lowest null count among the demographic fields such as- Education, Age, Ethnicity, Race, Gender. 
 9. Drop all rows where age is null because it has the lowest null frequency among demographic fields as well as it is an important column for analysis of data. 
 10. Create bronze delta table:
-    1.  Retention days: 60, Z-order field: CaseID, Partition field: Age
+    1.  Retention days: 60, Z-order field: CaseID, Partition field: Age (Age is low cardinality with an apporx. uniform distribution. Assuming a lot of queries will be age specific)
     2.  Mode: append, as we want to append new data to existing table
     3.  Table name: RawTable
 
 # Silver Layer (Notebook: silver_layer)
 1. Create a copy of bronze delta into a datframe
 2. Apply transforamtions for GENDER, RACE, ETHNIC, MARSTAT, EMPLOY
+   - Transformations are applied before creating delta table to reduce update operations on table itself. This will ensure better consistency in case of network or application failures. 
 3. Create silver delta table:
-    1.  Retention days: 60, Z-order field: CaseID, Partition field: Region
+    1.  Retention days: 60, Z-order field: CaseID, Partition field: Region (Region is used for partioning as it has a approx unifrom distribution with low cardinality)
     2.  Mode: append, as we want to append new data to existing table
     3.  Table name: TransformTable
 4. Validate schema with expected schema.
@@ -55,3 +56,11 @@ Note: If compute cluster is terminated. Create and attach new cluster from topri
 
 
 Note: For choosing z-order high cardinality index such as CASEID is chosen. For paritionin as low cardinality index with approximately uniform distribution is chosen. 
+
+
+Optimizations:
+1. WWe can use streaming in delta table for live updates to each layer if the data source changes frequently. 
+2. Transaction logs for each delta can be backed up for disaster recovery in case of failures. 
+3. Set periodicly perform vacuum operation to remove any stale logs before retention horizon.
+4. Batch job can be cerated for each stage which can sequentially trigger each notebook.
+5. Use logging and more try/catch to log any exceptions. Store these logs for monitoring. 
