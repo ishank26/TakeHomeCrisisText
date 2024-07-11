@@ -34,7 +34,7 @@ Note: If compute cluster is terminated. Create and attach new cluster from topri
     2.  Mode: append, as we want to append new data to existing table
     3.  Table name: TransformTable
 4. Validate schema with expected schema.
-5. I couldn't find columns for min max and z normalisation in dataset but have provided a sample code. 
+5. I couldn't find columns for min max and z normalisation in dataset but have provided a sample code. A scikit learn pipeline is constructued and excuted for this task.
 6. Stratified sampling is performed based on GENDER, RACE, ETHNIC, MARSTAT, EMPLOY ratio. 
    1. Train/ Val and Test is split based on ratio- 07/0.1/0.2
    2. First the train and test is split from dataset.
@@ -42,6 +42,7 @@ Note: If compute cluster is terminated. Create and attach new cluster from topri
    4. Create a report of count distribution afer splitting.
    5. Save the dataset splits in an output directory. 
    6. Save the report to specified directory.
+   7. For all the above task in sampling and splitting I created a scikit learn pipeline.
    
 # Gold Layer (Notebook: gold_layer)
 1. Create a copy of silver delta into a dataframe
