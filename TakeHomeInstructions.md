@@ -58,7 +58,7 @@ Note: If compute cluster is terminated. Create and attach new cluster from topri
 Note: For choosing z-order high cardinality index such as CASEID is chosen. For paritionin as low cardinality index with approximately uniform distribution is chosen. 
 
 
-Optimizations:
+# Optimizations:
 1. WWe can use streaming in delta table for live updates to each layer if the data source changes frequently. 
 2. Transaction logs for each delta can be backed up for disaster recovery in case of failures. 
 3. Set periodicly perform vacuum operation to remove any stale logs before retention horizon.
