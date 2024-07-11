@@ -2,7 +2,8 @@
 1. Login into databricks account (https://community.cloud.databricks.com/)
    1. Username: ishank269@gmail.com
    2. Password: wormholE@17
-2. Naviagte to workspace 
+2. Naviagte to workspace
+   
 Note: If compute cluster is terminated. Create and attach new cluster from topright button in each notebook.
 
 
