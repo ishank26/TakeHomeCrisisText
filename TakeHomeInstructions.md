@@ -44,6 +44,9 @@ Note: If compute cluster is terminated. Create and attach new cluster from topri
    5. Save the dataset splits in an output directory. 
    6. Save the report to specified directory.
    7. For all the above task in sampling and splitting I created a scikit learn pipeline.
+   8. Splitting logic-
+        a. The rationale is data set is large enough and random split ensures startifies data as seen in report
+        b. This won't ensure stratified data for all dataset so I added sampling logic wherein a groupby logic is used to get fractions and the sampling is applied on demographic columns (starta)
    
 # Gold Layer (Notebook: gold_layer)
 1. Create a copy of silver delta into a dataframe
